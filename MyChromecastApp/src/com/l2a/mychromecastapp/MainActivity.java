@@ -12,7 +12,12 @@ import android.support.v7.media.MediaRouter.RouteInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends ActionBarActivity {
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+public class MainActivity extends ActionBarActivity implements
+        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
 
     private MediaRouter mMediaRouter;
     private MediaRouteSelector mMediaRouteSelector;
@@ -61,6 +66,24 @@ public class MainActivity extends ActionBarActivity {
                 (MediaRouteActionProvider) MenuItemCompat.getActionProvider(mediaRouteMenuItem);
         mediaRouteActionProvider.setRouteSelector(mMediaRouteSelector);
         return true;
+    }
+
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onDisconnected() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {
+        // TODO Auto-generated method stub
+        
     }
 
     private class MyMediaRouterCallback extends MediaRouter.Callback {
