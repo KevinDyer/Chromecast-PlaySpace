@@ -4,7 +4,7 @@ package com.google.android.gms.cast.samples.democastplayer;
 
 import com.google.android.gms.cast.CastMediaControlIntent;
 import com.google.android.gms.cast.MediaInfo;
-
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
@@ -45,12 +45,12 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import java.util.concurrent.TimeUnit;
 
 /**
  * Base class for DemoCastPlayer activities.
  */
+@SuppressLint("DefaultLocale")
 abstract class BaseCastPlayerActivity extends ActionBarActivity
         implements OnSharedPreferenceChangeListener {
     private static final String TAG = "BaseCastPlayerActivity";
@@ -673,8 +673,10 @@ abstract class BaseCastPlayerActivity extends ActionBarActivity
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         Log.d(TAG, "pref changed: " + key);
         if (AppConstants.PREF_KEY_MEDIA_URL.equals(key)) {
-            // If the media URL changed, clear the media dialog's list so that
-            // it will refetch it.
+            /*
+             * If the media URL changed, clear the media dialog's list so that
+             * it will refetch it.
+             */
             if (mMediaSelectionDialog != null) {
                 Log.d(TAG, "flushing media list");
                 mMediaSelectionDialog.invalidateData();
