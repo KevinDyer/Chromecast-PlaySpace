@@ -95,8 +95,8 @@ abstract class MediaSelectionDialog extends ListSelectionDialog<MediaInfo> {
 
     private void readFile(XmlPullParser parser, List<MediaInfo> list)
             throws XmlPullParserException, IOException {
-        for (int type = parser.getEventType(); type != XmlPullParser.END_DOCUMENT;
-                type = parser.next()) {
+        for (int type = parser.getEventType(); type != XmlPullParser.END_DOCUMENT; type = parser
+                .next()) {
             if ((type == XmlPullParser.START_TAG) && XML_TAG_MEDIAS.equals(parser.getName())) {
                 AttributeSet attrs = Xml.asAttributeSet(parser);
 

@@ -214,15 +214,15 @@ public class SdkCastPlayerActivity extends BaseCastPlayerActivity {
 
         int resumeState;
         switch (behavior) {
-            case AFTER_SEEK_PLAY:
-                resumeState = RemoteMediaPlayer.RESUME_STATE_PLAY;
-                break;
-            case AFTER_SEEK_PAUSE:
-                resumeState = RemoteMediaPlayer.RESUME_STATE_PAUSE;
-                break;
-            case AFTER_SEEK_DO_NOTHING:
-            default:
-                resumeState = RemoteMediaPlayer.RESUME_STATE_UNCHANGED;
+        case AFTER_SEEK_PLAY:
+            resumeState = RemoteMediaPlayer.RESUME_STATE_PLAY;
+            break;
+        case AFTER_SEEK_PAUSE:
+            resumeState = RemoteMediaPlayer.RESUME_STATE_PAUSE;
+            break;
+        case AFTER_SEEK_DO_NOTHING:
+        default:
+            resumeState = RemoteMediaPlayer.RESUME_STATE_UNCHANGED;
         }
         mSeeking = true;
         mMediaPlayer.seek(mApiClient, position, resumeState).setResultCallback(

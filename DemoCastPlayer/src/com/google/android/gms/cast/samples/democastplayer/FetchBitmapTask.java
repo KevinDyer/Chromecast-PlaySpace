@@ -23,7 +23,7 @@ public abstract class FetchBitmapTask extends AsyncTask<Uri, Void, Bitmap> {
 
     /**
      * Constructs a new FetchBitmapTask that will do scaling.
-     *
+     * 
      * @param preferredWidth The preferred image width.
      * @param preferredHeight The preferred image height.
      */
@@ -76,7 +76,6 @@ public abstract class FetchBitmapTask extends AsyncTask<Uri, Void, Bitmap> {
 
     /*
      * Scales the bitmap to the preferred width and height.
-     *
      * @param bitmap The bitmap to scale.
      * @return The scaled bitmap.
      */

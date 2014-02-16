@@ -28,7 +28,8 @@ import android.view.View;
 import java.util.List;
 
 /**
- * Activity to cast media to a Cast enabled device using only the MediaRouter API.
+ * Activity to cast media to a Cast enabled device using only the MediaRouter
+ * API.
  */
 public class MrpCastPlayerActivity extends BaseCastPlayerActivity {
     private static final String TAG = "MrpCastPlayerActivity";
@@ -66,14 +67,15 @@ public class MrpCastPlayerActivity extends BaseCastPlayerActivity {
         mDeviceMuteCheckBox.setVisibility(View.GONE);
         setCurrentDeviceName(null);
 
-        // Construct a broadcast receiver and a PendingIntent for receiving session status
+        // Construct a broadcast receiver and a PendingIntent for receiving
+        // session status
         // updates from the MRP.
         mSessionStatusBroadcastReceiver = new BroadcastReceiver() {
-                @Override
-                public void onReceive(Context context, Intent intent) {
-                    Log.d(TAG, "Got a session status broadcast intent from the MRP: " + intent);
-                    processSessionStatusBundle(intent.getExtras());
-                }
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.d(TAG, "Got a session status broadcast intent from the MRP: " + intent);
+                processSessionStatusBundle(intent.getExtras());
+            }
         };
         mSessionStatusBroadcastIntentFilter = new IntentFilter(
                 ACTION_RECEIVE_SESSION_STATUS_UPDATE);
@@ -83,14 +85,15 @@ public class MrpCastPlayerActivity extends BaseCastPlayerActivity {
         mSessionStatusUpdateIntent = PendingIntent.getBroadcast(this, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
-        // Construct a broadcast receiver and a PendingIntent for receiving media status
+        // Construct a broadcast receiver and a PendingIntent for receiving
+        // media status
         // updates from the MRP.
         mMediaStatusBroadcastReceiver = new BroadcastReceiver() {
-                @Override
-                public void onReceive(Context context, Intent intent) {
-                    Log.d(TAG, "Got a media status broadcast intent from the MRP: " + intent);
-                    processMediaStatusBundle(intent.getExtras());
-                }
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.d(TAG, "Got a media status broadcast intent from the MRP: " + intent);
+                processMediaStatusBundle(intent.getExtras());
+            }
         };
         mMediaStatusBroadcastIntentFilter = new IntentFilter(ACTION_RECEIVE_MEDIA_STATUS_UPDATE);
 
@@ -107,7 +110,6 @@ public class MrpCastPlayerActivity extends BaseCastPlayerActivity {
                 updateButtonStates();
             }
         };
-
 
         clearStreamState();
     }
@@ -367,7 +369,8 @@ public class MrpCastPlayerActivity extends BaseCastPlayerActivity {
     }
 
     /*
-     * Processes a received session status bundle and updates the UI accordingly.
+     * Processes a received session status bundle and updates the UI
+     * accordingly.
      */
     private void processSessionStatusBundle(Bundle statusBundle) {
         Log.d(TAG, "processSessionStatusBundle()");
@@ -385,7 +388,8 @@ public class MrpCastPlayerActivity extends BaseCastPlayerActivity {
         }
 
         if (!mSessionId.equals(sessionId)) {
-            // Got status on a session other than the one we're tracking. Ignore it.
+            // Got status on a session other than the one we're tracking. Ignore
+            // it.
             Log.d(TAG, "Received status for unknown session: " + sessionId);
             return;
         }

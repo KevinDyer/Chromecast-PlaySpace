@@ -36,7 +36,8 @@ import android.view.View;
  */
 public class GameView extends View {
     /**
-     * An enum representing symbols on the board, either X, O, or empty, as int values.
+     * An enum representing symbols on the board, either X, O, or empty, as int
+     * values.
      */
     public enum State {
         UNKNOWN(-1),
@@ -68,7 +69,8 @@ public class GameView extends View {
     }
 
     /**
-     * A class which listens to cell events with a given row and column, and performs some action.
+     * A class which listens to cell events with a given row and column, and
+     * performs some action.
      */
     public interface ICellListener {
         abstract void onCellSelected(int row, int column);
@@ -90,7 +92,8 @@ public class GameView extends View {
     private ICellListener mCellListener;
 
     /**
-     * Contains one of {@link State#EMPTY}, {@link State#PLAYER_X} or {@link State#PLAYER_O}.
+     * Contains one of {@link State#EMPTY}, {@link State#PLAYER_X} or
+     * {@link State#PLAYER_O}.
      */
     private final State[][] mBoard = new State[3][3];
     private State mAssignedPlayer = State.UNKNOWN;
@@ -101,9 +104,10 @@ public class GameView extends View {
 
     /**
      * Creates a new GameView object and initializes board drawing tools.
-     *
+     * 
      * @param context the application context this object lies within
-     * @param attrs this object's specified attributes, whether through xml or otherwise
+     * @param attrs this object's specified attributes, whether through xml or
+     *            otherwise
      */
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -140,7 +144,8 @@ public class GameView extends View {
     }
 
     /**
-     * Updates the current layout of the board with the values stored in boardLayout.
+     * Updates the current layout of the board with the values stored in
+     * boardLayout.
      */
     public void updateBoard(int[][] boardLayout) {
         for (int i = 0; i < boardLayout.length; ++i) {
@@ -181,8 +186,8 @@ public class GameView extends View {
     }
 
     /**
-     * Draws the board after each update, including all X and O symbols and possible win-state
-     * indicator lines, if any.
+     * Draws the board after each update, including all X and O symbols and
+     * possible win-state indicator lines, if any.
      */
     @Override
     protected void onDraw(Canvas canvas) {
@@ -255,8 +260,8 @@ public class GameView extends View {
     }
 
     /**
-     * Detects whether the user has touched and released a cell, and if so alerts its listener that
-     * the cell has been selected.
+     * Detects whether the user has touched and released a cell, and if so
+     * alerts its listener that the cell has been selected.
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {

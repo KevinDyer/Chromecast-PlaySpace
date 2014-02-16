@@ -16,10 +16,11 @@
 
 package com.google.android.gms.cast.samples.tictactoe;
 
+import android.util.Log;
+
 import com.google.android.gms.cast.Cast;
 import com.google.android.gms.cast.CastDevice;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.Result;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
@@ -27,11 +28,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
-
 /**
- * An abstract class which encapsulates control and game logic for sending and receiving messages
- * during a TicTacToe game.
+ * An abstract class which encapsulates control and game logic for sending and
+ * receiving messages during a TicTacToe game.
  */
 public abstract class GameChannel implements Cast.MessageReceivedCallback {
     private static final String TAG = GameChannel.class.getSimpleName();
@@ -73,7 +72,8 @@ public abstract class GameChannel implements Cast.MessageReceivedCallback {
     private static final String KEY_WINNING_LOCATION = "winning_location";
 
     /**
-     * An enum representing board rows, columns, and diagonals as numerical values.
+     * An enum representing board rows, columns, and diagonals as numerical
+     * values.
      */
     public enum WinningLocation {
         ROW_0(0),
@@ -123,23 +123,24 @@ public abstract class GameChannel implements Cast.MessageReceivedCallback {
     }
 
     /**
-     * Constructs a new GameChannel m with GAME_NAMESPACE as the namespace used by
-     * the superclass.
+     * Constructs a new GameChannel m with GAME_NAMESPACE as the namespace used
+     * by the superclass.
      */
     protected GameChannel() {
     }
 
     /**
      * Performs some action upon a player joining the game.
-     *
+     * 
      * @param playerSymbol either X or O
-     * @param opponentName the name of the player who just joined an existing game, or the opponent
+     * @param opponentName the name of the player who just joined an existing
+     *            game, or the opponent
      */
     protected abstract void onGameJoined(String playerSymbol, String opponentName);
 
     /**
      * Performs some action, or updates the game display upon a move.
-     *
+     * 
      * @param playerSymbol either X or O
      * @param row the row index of the move
      * @param column the column index of the move
@@ -149,24 +150,26 @@ public abstract class GameChannel implements Cast.MessageReceivedCallback {
             String playerSymbol, int row, int column, boolean isGameOver);
 
     /**
-     * Performs some action upon game end, depending on game's end state and the position of the
-     * winning pieces.
-     *
-     * @param endState likely to be END_STATE_X_WON, END_STATE_O_WON, or END_STATE_ABANDONED
-     * @param location an int value corresponding to the enum WinningLocation's values
+     * Performs some action upon game end, depending on game's end state and the
+     * position of the winning pieces.
+     * 
+     * @param endState likely to be END_STATE_X_WON, END_STATE_O_WON, or
+     *            END_STATE_ABANDONED
+     * @param location an int value corresponding to the enum WinningLocation's
+     *            values
      */
     protected abstract void onGameEnd(String endState, int location);
 
     /**
      * Performs some action upon an int[][] board layout being sent.
-     *
+     * 
      * @param boardLayout a 2-D array of ints, likely to be 3x3
      */
     protected abstract void onGameBoardLayout(int[][] boardLayout);
 
     /**
      * Performs some action upon a game error.
-     *
+     * 
      * @param errorMessage the string description of the error
      */
     protected abstract void onGameError(String errorMessage);
@@ -179,8 +182,9 @@ public abstract class GameChannel implements Cast.MessageReceivedCallback {
     }
 
     /**
-     * Attempts to connect to an existing session of the game by sending a join command.
-     *
+     * Attempts to connect to an existing session of the game by sending a join
+     * command.
+     * 
      * @param name the name of the player that is joining
      */
     public final void join(GoogleApiClient apiClient, String name) {
@@ -196,7 +200,8 @@ public abstract class GameChannel implements Cast.MessageReceivedCallback {
     }
 
     /**
-     * Attempts to make a move by sending a command to place a piece in the given row and column.
+     * Attempts to make a move by sending a command to place a piece in the
+     * given row and column.
      */
     public final void move(GoogleApiClient apiClient, final int row, final int column) {
         Log.d(TAG, "move: row:" + row + " column:" + column);
@@ -240,18 +245,19 @@ public abstract class GameChannel implements Cast.MessageReceivedCallback {
     }
 
     /**
-     * Processes all Text messages received from the receiver device and performs the appropriate
-     * action for the message. Recognizable messages are of the form:
-     *
+     * Processes all Text messages received from the receiver device and
+     * performs the appropriate action for the message. Recognizable messages
+     * are of the form:
      * <ul>
-     * <li> KEY_JOINED: a player joined the current game
-     * <li> KEY_MOVED: a player made a move
-     * <li> KEY_ENDGAME: the game has ended in one of the END_STATE_* states
-     * <li> KEY_ERROR: a game error has occurred
-     * <li> KEY_BOARD_LAYOUT_RESPONSE: the board has been laid out in some new configuration
+     * <li>KEY_JOINED: a player joined the current game
+     * <li>KEY_MOVED: a player made a move
+     * <li>KEY_ENDGAME: the game has ended in one of the END_STATE_* states
+     * <li>KEY_ERROR: a game error has occurred
+     * <li>KEY_BOARD_LAYOUT_RESPONSE: the board has been laid out in some new
+     * configuration
      * </ul>
-     *
-     * <p>No other messages are recognized.
+     * <p>
+     * No other messages are recognized.
      */
     @Override
     public void onMessageReceived(CastDevice castDevice, String namespace, String message) {

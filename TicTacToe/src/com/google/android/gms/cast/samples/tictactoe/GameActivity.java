@@ -50,8 +50,9 @@ import android.widget.TextView;
 import java.io.IOException;
 
 /**
- * An activity which both presents a UI on the first screen and casts the TicTacToe game board to
- * the selected Cast device and its attached second screen.
+ * An activity which both presents a UI on the first screen and casts the
+ * TicTacToe game board to the selected Cast device and its attached second
+ * screen.
  */
 public class GameActivity extends ActionBarActivity {
     private static final String TAG = GameActivity.class.getSimpleName();
@@ -75,8 +76,9 @@ public class GameActivity extends ActionBarActivity {
     private TicTacToeChannel mGameChannel;
 
     /**
-     * Called when the activity is first created. Initializes the game with necessary listeners
-     * for player interaction, and creates a new cast channel.
+     * Called when the activity is first created. Initializes the game with
+     * necessary listeners for player interaction, and creates a new cast
+     * channel.
      */
     @Override
     public void onCreate(Bundle bundle) {
@@ -133,8 +135,8 @@ public class GameActivity extends ActionBarActivity {
     }
 
     /**
-     * Called on application start. Using the previously selected Cast device, attempts to begin a
-     * session using the application name TicTacToe.
+     * Called on application start. Using the previously selected Cast device,
+     * attempts to begin a session using the application name TicTacToe.
      */
     @Override
     protected void onStart() {
@@ -181,8 +183,9 @@ public class GameActivity extends ActionBarActivity {
     }
 
     /**
-     * Returns the string representation of a State object representing a player, or null if the
-     * passed player does not correspond to an X or O player.
+     * Returns the string representation of a State object representing a
+     * player, or null if the passed player does not correspond to an X or O
+     * player.
      */
     private String convertGameStateToPlayer(State player) {
         if (player == State.PLAYER_X) {
@@ -195,8 +198,8 @@ public class GameActivity extends ActionBarActivity {
     }
 
     /**
-     * Builds and displays a dialog indicating the completion of the game, whether by forfeit or
-     * by one player winning.
+     * Builds and displays a dialog indicating the completion of the game,
+     * whether by forfeit or by one player winning.
      */
     private void setFinished(
             State player, int row, int column, int diagonal, boolean wasAbandoned) {
@@ -301,8 +304,8 @@ public class GameActivity extends ActionBarActivity {
     }
 
     /**
-     * A class which listens for the selection of a certain cell and attempts to place a mark in
-     * that cell.
+     * A class which listens for the selection of a certain cell and attempts to
+     * place a mark in that cell.
      */
     private class CellListener implements ICellListener {
         @Override
@@ -320,9 +323,10 @@ public class GameActivity extends ActionBarActivity {
     private class TicTacToeChannel extends GameChannel {
         /**
          * Sets displays accordingly when a new player joins the game.
-         *
+         * 
          * @param playerSymbol either X or O
-         * @param opponentName the name of the player who just joined an existing game
+         * @param opponentName the name of the player who just joined an
+         *            existing game
          */
         @Override
         protected void onGameJoined(String playerSymbol, String opponentName) {
@@ -358,9 +362,9 @@ public class GameActivity extends ActionBarActivity {
         }
 
         /**
-         * At the end of the game, obtains the winning player or whether the game was forfeited, and
-         * if a player won, which board position was the winning cell. Passes this information to
-         * {@code setFinished()}.
+         * At the end of the game, obtains the winning player or whether the
+         * game was forfeited, and if a player won, which board position was the
+         * winning cell. Passes this information to {@code setFinished()}.
          */
         @Override
         protected void onGameEnd(String endState, int location) {
@@ -405,7 +409,8 @@ public class GameActivity extends ActionBarActivity {
         }
 
         /**
-         * Clears the game board upon a game error being detected, and displays an error dialog.
+         * Clears the game board upon a game error being detected, and displays
+         * an error dialog.
          */
         @Override
         protected void onGameError(String errorMessage) {
@@ -434,7 +439,8 @@ public class GameActivity extends ActionBarActivity {
     }
 
     /**
-     * An extension of the MediaRoute.Callback specifically for the TicTacToe game.
+     * An extension of the MediaRoute.Callback specifically for the TicTacToe
+     * game.
      */
     private class MediaRouterCallback extends MediaRouter.Callback {
         @Override

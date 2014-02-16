@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Abstract base class for a dialog that displays a lazily-loaded list of items
  * for single-selection.
- *
+ * 
  * @param <T> The type of object being listed.
  */
 public abstract class ListSelectionDialog<T> extends DialogFragment {
@@ -54,15 +54,15 @@ public abstract class ListSelectionDialog<T> extends DialogFragment {
         mListView = (ListView) view.findViewById(R.id.list_view);
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    T item = mListAdapter.getItem(position);
-                    if (item != null) {
-                        onItemSelected(item);
-                    }
-                    dismiss();
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                T item = mListAdapter.getItem(position);
+                if (item != null) {
+                    onItemSelected(item);
                 }
-            });
+                dismiss();
+            }
+        });
 
         mProgressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
         mEmptyView = view.findViewById(R.id.empty);
@@ -153,6 +153,6 @@ public abstract class ListSelectionDialog<T> extends DialogFragment {
     /**
      * Called when the dialog is canceled.
      */
-    protected void onCanceled() { }
+    protected void onCanceled() {
+    }
 }
-

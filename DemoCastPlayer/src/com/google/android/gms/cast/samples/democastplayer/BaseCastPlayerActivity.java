@@ -188,10 +188,9 @@ abstract class BaseCastPlayerActivity extends ActionBarActivity
 
         // TODO: Add RemoteControlClient support.
         /*
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-            setUpRemoteControlClient();
-        }
-        */
+         * if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+         * { setUpRemoteControlClient(); }
+         */
     }
 
     @Override
@@ -199,7 +198,7 @@ abstract class BaseCastPlayerActivity extends ActionBarActivity
         super.onStart();
 
         mMediaRouter.addCallback(mMediaRouteSelector, mMediaRouterCallback,
-            MediaRouter.CALLBACK_FLAG_PERFORM_ACTIVE_SCAN);
+                MediaRouter.CALLBACK_FLAG_PERFORM_ACTIVE_SCAN);
     }
 
     @Override
@@ -277,22 +276,41 @@ abstract class BaseCastPlayerActivity extends ActionBarActivity
     }
 
     protected abstract void onVolumeChange(double delta);
+
     protected abstract void onPlayMedia(MediaInfo media);
 
-    protected void onLaunchAppClicked() { }
-    protected void onJoinAppClicked() { }
-    protected void onLeaveAppClicked() { }
-    protected void onStopAppClicked() { }
-    protected void onStartSessionClicked() { }
-    protected void onEndSessionClicked() { }
+    protected void onLaunchAppClicked() {
+    }
+
+    protected void onJoinAppClicked() {
+    }
+
+    protected void onLeaveAppClicked() {
+    }
+
+    protected void onStopAppClicked() {
+    }
+
+    protected void onStartSessionClicked() {
+    }
+
+    protected void onEndSessionClicked() {
+    }
 
     protected abstract void onPlayClicked();
+
     protected abstract void onPauseClicked();
+
     protected abstract void onStopClicked();
+
     protected abstract void onSeekBarMoved(long position);
+
     protected abstract void onDeviceVolumeBarMoved(int volume);
+
     protected abstract void onDeviceMuteToggled(boolean on);
+
     protected abstract void onStreamVolumeBarMoved(int volume);
+
     protected abstract void onStreamMuteToggled(boolean on);
 
     private void setUpControls() {
@@ -363,8 +381,10 @@ abstract class BaseCastPlayerActivity extends ActionBarActivity
             }
         });
 
-        // Seek bar's range is in seconds, to prevent possibility of user seeking to fractions of
-        // seconds.
+        /*
+         * Seek bar's range is in seconds, to prevent possibility of user
+         * seeking to fractions of seconds.
+         */
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
@@ -477,9 +497,9 @@ abstract class BaseCastPlayerActivity extends ActionBarActivity
     }
 
     /**
-     * Updates the currently-playing-item metadata display. If the image URL is non-null and is
-     * different from the one that is currently displayed, an asynchronous request will be started
-     * to fetch the image at that URL.
+     * Updates the currently-playing-item metadata display. If the image URL is
+     * non-null and is different from the one that is currently displayed, an
+     * asynchronous request will be started to fetch the image at that URL.
      */
     protected final void setCurrentMediaMetadata(String title, String subtitle, Uri imageUrl) {
         Log.d(TAG, "setCurrentMediaMetadata: " + title + "," + subtitle + "," + imageUrl);
@@ -515,11 +535,10 @@ abstract class BaseCastPlayerActivity extends ActionBarActivity
     }
 
     /**
-     *
-     * @param position The stream position, or 0 if no media is currently loaded, or -1 to leave
-     * the value unchanged.
-     * @param duration The stream duration, or 0 if no media is currently loaded, or -1 to leave
-     * the value unchanged.
+     * @param position The stream position, or 0 if no media is currently
+     *            loaded, or -1 to leave the value unchanged.
+     * @param duration The stream duration, or 0 if no media is currently
+     *            loaded, or -1 to leave the value unchanged.
      */
     protected final void refreshPlaybackPosition(long position, long duration) {
         if (!mIsUserSeeking) {
@@ -621,11 +640,13 @@ abstract class BaseCastPlayerActivity extends ActionBarActivity
     }
 
     /**
-     * Override to specify the control category to send with the {@link MediaRouteSelector} request.
+     * Override to specify the control category to send with the
+     * {@link MediaRouteSelector} request.
      */
     protected abstract String getControlCategory();
 
     protected abstract void onRouteSelected(RouteInfo route);
+
     protected abstract void onRouteUnselected(RouteInfo route);
 
     private MediaRouteSelector buildMediaRouteSelector() {
@@ -652,7 +673,8 @@ abstract class BaseCastPlayerActivity extends ActionBarActivity
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         Log.d(TAG, "pref changed: " + key);
         if (AppConstants.PREF_KEY_MEDIA_URL.equals(key)) {
-            // If the media URL changed, clear the media dialog's list so that it will refetch it.
+            // If the media URL changed, clear the media dialog's list so that
+            // it will refetch it.
             if (mMediaSelectionDialog != null) {
                 Log.d(TAG, "flushing media list");
                 mMediaSelectionDialog.invalidateData();
@@ -660,7 +682,8 @@ abstract class BaseCastPlayerActivity extends ActionBarActivity
         } else if (AppConstants.PREF_KEY_RELAUNCH_APP.equals(key)) {
             mRelaunchApp = sharedPreferences.getBoolean(AppConstants.PREF_KEY_RELAUNCH_APP, false);
         } else if (AppConstants.PREF_KEY_STOP_APP.equals(key)) {
-            mStopAppWhenEndingSession = sharedPreferences.getBoolean(AppConstants.PREF_KEY_STOP_APP,
+            mStopAppWhenEndingSession = sharedPreferences.getBoolean(
+                    AppConstants.PREF_KEY_STOP_APP,
                     false);
         } else if (AppConstants.PREF_KEY_RECEIVER_APPLICATION_ID.equals(key)) {
             mReceiverApplicationId = sharedPreferences.getString(
@@ -714,8 +737,8 @@ abstract class BaseCastPlayerActivity extends ActionBarActivity
 
         mRemoteControlClient.setTransportControlFlags(
                 RemoteControlClient.FLAG_KEY_MEDIA_PLAY_PAUSE
-                | RemoteControlClient.FLAG_KEY_MEDIA_NEXT
-                | RemoteControlClient.FLAG_KEY_MEDIA_PREVIOUS);
+                        | RemoteControlClient.FLAG_KEY_MEDIA_NEXT
+                        | RemoteControlClient.FLAG_KEY_MEDIA_PREVIOUS);
 
         mMediaRouter.addRemoteControlClient(mRemoteControlClient);
     }
